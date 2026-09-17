@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>飲食與飲食文學 · 互動式學習網頁</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-tc@5/chinese-traditional-400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-tc@5/chinese-traditional-600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-tc@5/chinese-traditional-700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-tc@5/chinese-traditional-900.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-tc@5/chinese-traditional-300.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-tc@5/chinese-traditional-400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-tc@5/chinese-traditional-500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-tc@5/chinese-traditional-700.css">
+
+<style>
+:root{
+  --cream:#FAF4E9;
+  --paper:#FFFDF7;
+  --sand:#F0E5D3;
+  --ink:#221B14;
+  --espresso:#3B2A1C;
+  --terra:#B85433;
+  --terra-soft:#D97B54;
+  --gold:#C9992F;
+  --gold-soft:#E4C87A;
+  --olive:#5F6B45;
+  --plum:#7A3550;
+  --line:rgba(59,42,28,.16);
+  --shadow:0 20px 50px -24px rgba(59,42,28,.45);
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
+}
+::selection{background:var(--gold-soft);color:var(--espresso)}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--sand)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--terra),var(--gold));border-radius:8px}
+
+/* ---------- top progress ---------- */
+#scrollBar{position:fixed;top:0;left:0;height:4px;width:0;z-index:1000;
+  background:linear-gradient(90deg,var(--terra),var(--gold),var(--olive));transition:width .12s linear}
+
+/* ---------- nav ---------- */
+header.nav{
+  position:fixed;top:4px;left:0;right:0;z-index:900;
+  background:rgba(250,244,233,.82);backdrop-filter:blur(14px) saturate(1.2);
+  border-bottom:1px solid var(--line);
+}
+.navInner{max-width:1240px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;flex-shrink:0;text-decoration:none;color:var(--ink)}
+.seal{
+  width:40px;height:40px;border-radius:8px;background:var(--terra);color:#FFF6E9;
+  display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:19px;
+  box-shadow:inset 0 0 0 2px rgba(255,246,233,.45);letter-spacing:-1px;
+}
+.brandTxt b{font-family:var(--serif);font-size:17px;font-weight:700;display:block;line-height:1.25;letter-spacing:.06em}
+.brandTxt span{font-size:10.5px;letter-spacing:.24em;color:var(--terra);text-transform:uppercase}
+.navLinks{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.navLinks::-webkit-scrollbar{display:none}
+.navLinks a{
+  font-size:13px;padding:7px 12px;border-radius:999px;text-decoration:none;color:var(--espresso);
+  white-space:nowrap;opacity:.72;transition:.25s;position:relative;letter-spacing:.04em;
+}
+.navLinks a:hover{opacity:1;background:rgba(184,84,51,.1)}
+.navLinks a.active{opacity:1;background:var(--espresso);color:var(--cream);font-weight:500}
+.navLinks a.done::after{content:"";position:absolute;top:5px;right:6px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:120px 24px 60px}
+.heroBg{position:absolute;inset:0;z-index:0;
+  background:
+   radial-gradient(1100px 620px at 82% 8%, rgba(228,200,122,.42), transparent 62%),
+   radial-gradient(880px 560px at 8% 88%, rgba(184,84,51,.26), transparent 64%),
+   radial-gradient(700px 500px at 50% 40%, rgba(95,107,69,.14), transparent 70%),
+   linear-gradient(160deg,#FFFDF7 0%,#F6EBD8 55%,#EEDCC2 100%);
+}
+.heroGrid{position:absolute;inset:0;z-index:1;opacity:.35;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(circle at 50% 45%,#000 20%,transparent 78%);
+}
+.heroInner{position:relative;z-index:3;max-width:1240px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.32em;
+  color:var(--terra);text-transform:uppercase;font-weight:500;margin-bottom:22px}
+.eyebrow::before{content:"";width:44px;height:1px;background:var(--terra)}
+h1.heroTitle{font-family:var(--serif);font-weight:900;font-size:clamp(44px,7.2vw,96px);line-height:1.06;
+  letter-spacing:.02em;color:var(--espresso)}
+h1.heroTitle em{font-style:normal;position:relative;display:inline-block;color:var(--terra)}
+h1.heroTitle em::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:14px;z-index:-1;
+  background:linear-gradient(90deg,rgba(228,200,122,.85),rgba(228,200,122,.25));transform:skewX(-8deg)}
+.heroSub{margin-top:26px;font-size:17px;color:#5C4B3A;max-width:560px;font-weight:300}
+.heroMeta{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
+.pill{border:1px solid var(--line);background:rgba(255,253,247,.72);border-radius:999px;padding:8px 18px;
+  font-size:12.5px;letter-spacing:.08em;color:var(--espresso);transition:.3s}
+.pill:hover{background:var(--espresso);color:var(--cream);transform:translateY(-3px)}
+.heroCta{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{border:none;cursor:pointer;font-family:var(--sans);font-size:14px;letter-spacing:.1em;
+  padding:15px 30px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:.3s}
+.btnPrimary{background:var(--terra);color:#FFF7EC;box-shadow:0 14px 30px -12px rgba(184,84,51,.85)}
+.btnPrimary:hover{background:#9E4327;transform:translateY(-3px)}
+.btnGhost{background:transparent;color:var(--espresso);border:1.5px solid var(--espresso)}
+.btnGhost:hover{background:var(--espresso);color:var(--cream);transform:translateY(-3px)}
+
+.heroArt{position:relative;display:grid;place-items:center}
+.heroArt svg{width:100%;max-width:460px;height:auto;filter:drop-shadow(0 30px 40px rgba(59,42,28,.22))}
+.floatTag{position:absolute;background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  padding:11px 16px;font-size:12px;box-shadow:var(--shadow);letter-spacing:.06em}
+.floatTag b{font-family:var(--serif);display:block;font-size:15px;color:var(--terra)}
+.ft1{top:6%;left:-4%;animation:floaty 6s ease-in-out infinite}
+.ft2{bottom:14%;right:-2%;animation:floaty 7.4s ease-in-out infinite reverse}
+.ft3{bottom:-2%;left:12%;animation:floaty 8.2s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+
+.scrollHint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:4;
+  font-size:11px;letter-spacing:.3em;color:#8B7763;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scrollHint i{display:block;width:1px;height:44px;background:linear-gradient(var(--terra),transparent);animation:drip 2.2s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}56%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- sections ---------- */
+section{position:relative;z-index:2;padding:104px 24px}
+.wrap{max-width:1180px;margin:0 auto}
+.secHead{margin-bottom:52px}
+.secNum{font-family:var(--serif);font-size:13px;letter-spacing:.34em;color:var(--gold);font-weight:700}
+.secTitle{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4.6vw,50px);line-height:1.22;
+  color:var(--espresso);margin:12px 0 14px;letter-spacing:.03em}
+.secLead{font-size:15.5px;color:#6B5A48;max-width:720px;font-weight:300}
+.rule{height:1px;background:linear-gradient(90deg,var(--terra),var(--gold),transparent);margin:22px 0 0;max-width:280px}
+
+.alt{background:linear-gradient(180deg,#FFFDF7,#F7EFE1)}
+.dark{background:radial-gradient(900px 500px at 15% 0%,rgba(201,153,47,.18),transparent 60%),linear-gradient(150deg,#2A2018,#1A1410);color:#EFE4D3}
+.dark .secTitle{color:#FFF6E6}
+.dark .secLead{color:#C9B79F}
+.dark .secNum{color:var(--gold-soft)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- cards general ---------- */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px;
+  box-shadow:0 12px 34px -26px rgba(59,42,28,.6);transition:.35s}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(201,153,47,.5)}
+
+/* 三重意義 */
+.meanGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.meanCard{position:relative;border-radius:20px;padding:34px 28px 30px;overflow:hidden;cursor:pointer;
+  border:1px solid var(--line);background:var(--paper);transition:.4s;min-height:290px}
+.meanCard::before{content:"";position:absolute;inset:0;opacity:0;transition:.4s;
+  background:linear-gradient(155deg,var(--terra),#8E3B22)}
+.meanCard.on::before{opacity:1}
+.meanCard.on{border-color:transparent;transform:translateY(-6px);box-shadow:var(--shadow)}
+.meanCard>*{position:relative;z-index:2}
+.meanCard.on .mLabel,.meanCard.on h3,.meanCard.on p,.meanCard.on .mMore{color:#FFF3E4}
+.mLabel{font-family:var(--serif);font-size:52px;font-weight:900;color:rgba(184,84,51,.16);line-height:1;transition:.4s}
+.meanCard h3{font-family:var(--serif);font-size:23px;font-weight:700;margin:6px 0 4px;color:var(--espresso)}
+.mQ{font-size:12px;letter-spacing:.16em;color:var(--terra);margin-bottom:16px;font-weight:500}
+.meanCard.on .mQ{color:var(--gold-soft)}
+.meanCard p{font-size:14px;color:#5F4E3D;font-weight:300}
+.mMore{max-height:0;overflow:hidden;transition:max-height .5s ease,opacity .4s;opacity:0;font-size:13.5px;color:#5F4E3D}
+.meanCard.on .mMore{max-height:220px;opacity:1;margin-top:14px;padding-top:14px;border-top:1px dashed rgba(255,243,228,.4)}
+.mHint{margin-top:16px;font-size:11.5px;letter-spacing:.14em;color:var(--gold);display:flex;align-items:center;gap:7px}
+
+/* venn */
+.vennWrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.vennBox{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow)}
+.vennBox svg{width:100%;height:auto;display:block}
+.vzone{cursor:pointer;transition:.3s}
+.vzone:hover{opacity:.82}
+.vLabel{font-family:var(--serif);font-weight:700;fill:var(--espresso);pointer-events:none}
+.vPanel{background:linear-gradient(160deg,#FFFDF7,#F4E9D7);border:1px solid var(--line);border-left:4px solid var(--terra);
+  border-radius:16px;padding:28px}
+.vPanel h4{font-family:var(--serif);font-size:22px;color:var(--terra);margin-bottom:12px}
+.vPanel p{font-size:14.5px;color:#5C4B3A;font-weight:300}
+.vPanel .tagrow{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.vPanel .tagrow span{font-size:11.5px;background:rgba(184,84,51,.1);color:var(--terra);padding:5px 12px;border-radius:999px;letter-spacing:.06em}
+
+/* culture */
+.culGrid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:8px}
+.culItem{display:flex;gap:18px;background:rgba(255,253,247,.06);border:1px solid rgba(228,200,122,.22);
+  border-radius:18px;padding:26px;transition:.35s}
+.culItem:hover{background:rgba(228,200,122,.12);transform:translateX(6px)}
+.culIcon{flex:0 0 54px;height:54px;border-radius:14px;background:rgba(228,200,122,.16);display:grid;place-items:center}
+.culIcon svg{width:28px;height:28px;stroke:var(--gold-soft);fill:none;stroke-width:1.6}
+.culItem h4{font-family:var(--serif);font-size:19px;color:#FFF3E0;margin-bottom:8px}
+.culItem p{font-size:14px;color:#C6B49C;font-weight:300}
+
+/* classic types */
+.typeGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.typeBtn{border:1px solid var(--line);background:var(--paper);border-radius:16px;padding:20px 14px;cursor:pointer;
+  text-align:center;transition:.3s;position:relative;overflow:hidden}
+.typeBtn::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--terra);transform:scaleX(0);transition:.35s}
+.typeBtn:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.typeBtn.sel{background:var(--espresso);border-color:var(--espresso);color:var(--cream)}
+.typeBtn.sel::after{transform:scaleX(1)}
+.typeBtn .tn{font-family:var(--serif);font-size:12px;color:var(--gold);letter-spacing:.2em}
+.typeBtn.sel .tn{color:var(--gold-soft)}
+.typeBtn .tt{font-family:var(--serif);font-size:16.5px;font-weight:700;margin-top:8px;line-height:1.4}
+.typeDetail{margin-top:26px;background:var(--paper);border:1px solid var(--line);border-radius:20px;
+  padding:34px;display:grid;grid-template-columns:auto 1fr;gap:30px;box-shadow:var(--shadow);animation:fadeUp .5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.tdSeal{width:96px;height:96px;border-radius:18px;background:linear-gradient(150deg,var(--terra),#7E3320);
+  display:grid;place-items:center;color:#FFF3E2;font-family:var(--serif);font-size:30px;font-weight:900;
+  box-shadow:inset 0 0 0 3px rgba(255,243,226,.3)}
+.typeDetail h4{font-family:var(--serif);font-size:25px;color:var(--espresso);margin-bottom:6px}
+.typeDetail .sub{font-size:12px;letter-spacing:.18em;color:var(--terra);margin-bottom:14px}
+.typeDetail p{font-size:14.5px;color:#5C4B3A;font-weight:300;max-width:760px}
+.bookRow{margin-top:16px;display:flex;flex-wrap:wrap;gap:9px}
+.bookRow span{font-family:var(--serif);font-size:14px;background:var(--sand);border:1px solid var(--line);
+  padding:6px 15px;border-radius:8px;color:var(--espresso)}
+
+/* game */
+.gameBox{margin-top:44px;background:linear-gradient(160deg,#FFFDF7,#F3E8D6);border:1px solid var(--line);
+  border-radius:22px;padding:34px}
+.gameHead{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-bottom:26px}
+.gameHead h4{font-family:var(--serif);font-size:22px;color:var(--espresso)}
+.gameHead p{font-size:13px;color:#7A6650}
+.scoreChip{background:var(--espresso);color:var(--gold-soft);border-radius:999px;padding:8px 20px;font-size:13px;letter-spacing:.08em}
+.matchCols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.matchCol{display:flex;flex-direction:column;gap:11px}
+.matchCol h5{font-size:11.5px;letter-spacing:.24em;color:var(--terra);margin-bottom:4px;font-weight:500}
+.mItem{border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:13px 18px;cursor:pointer;
+  font-size:14.5px;transition:.25s;text-align:left;font-family:var(--sans)}
+.mItem:hover:not(:disabled){border-color:var(--gold);transform:translateX(4px)}
+.mItem.picked{background:var(--terra);color:#FFF3E4;border-color:var(--terra);font-weight:500}
+.mItem.right{background:rgba(95,107,69,.16);border-color:var(--olive);color:var(--olive);cursor:default;font-weight:500}
+.mItem.wrong{animation:shake .4s}
+.mItem:disabled{opacity:.9;cursor:default}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+
+/* taiwan */
+.tabs{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:26px}
+.tab{border:1px solid var(--line);background:transparent;border-radius:999px;padding:10px 22px;cursor:pointer;
+  font-size:13.5px;font-family:var(--sans);color:#5C4B3A;transition:.3s;letter-spacing:.04em}
+.tab:hover{border-color:var(--terra);color:var(--terra)}
+.tab.on{background:var(--terra);border-color:var(--terra);color:#FFF3E4;font-weight:500}
+.tabPanel{display:none;animation:fadeUp .5s ease}
+.tabPanel.on{display:block}
+.tabPanel .card{border-left:4px solid var(--gold)}
+.tabPanel h4{font-family:var(--serif);font-size:21px;color:var(--terra);margin-bottom:10px}
+.tabPanel p{font-size:14.5px;color:#5C4B3A;font-weight:300}
+
+.srcGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.srcCard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px 18px;text-align:center;transition:.35s;cursor:default}
+.srcCard:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:var(--shadow);border-color:var(--gold)}
+.srcCard .sn{font-family:var(--serif);font-size:34px;font-weight:900;color:rgba(184,84,51,.22);line-height:1}
+.srcCard h5{font-family:var(--serif);font-size:16px;color:var(--espresso);margin-top:10px;line-height:1.5}
+
+.timeline{position:relative;margin-top:20px;padding-left:0}
+.timeline::before{content:"";position:absolute;left:26px;top:12px;bottom:12px;width:2px;
+  background:linear-gradient(var(--terra),var(--gold),var(--olive))}
+.tlItem{position:relative;padding:0 0 26px 78px}
+.tlDot{position:absolute;left:14px;top:2px;width:26px;height:26px;border-radius:50%;background:var(--paper);
+  border:3px solid var(--terra);display:grid;place-items:center;font-size:10px;font-weight:700;color:var(--terra);font-family:var(--serif)}
+.tlCard{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.3s}
+.tlHead{padding:20px 24px;cursor:pointer;display:flex;gap:16px;align-items:center;justify-content:space-between}
+.tlHead:hover{background:rgba(201,153,47,.08)}
+.tlYear{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--terra);letter-spacing:.08em;white-space:nowrap}
+.tlHead h4{font-family:var(--serif);font-size:18.5px;color:var(--espresso);flex:1}
+.tlChev{width:22px;height:22px;stroke:var(--terra);fill:none;stroke-width:2;transition:.35s;flex-shrink:0}
+.tlItem.open .tlChev{transform:rotate(180deg)}
+.tlBody{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.tlBodyIn{padding:0 24px 24px;font-size:14.5px;color:#5C4B3A;font-weight:300}
+.tlBodyIn .chips{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.tlBodyIn .chips span{font-size:12.5px;background:var(--sand);border:1px solid var(--line);padding:5px 13px;border-radius:999px;font-family:var(--serif)}
+
+.era5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:22px}
+.e5{border-radius:16px;padding:22px 16px;border:1px solid var(--line);background:var(--paper);cursor:pointer;transition:.35s;text-align:center}
+.e5:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.e5.on{background:var(--espresso);color:var(--cream);border-color:var(--espresso)}
+.e5 .e5i{font-family:var(--serif);font-size:26px;color:var(--gold)}
+.e5.on .e5i{color:var(--gold-soft)}
+.e5 h6{font-family:var(--serif);font-size:15.5px;margin-top:8px;font-weight:700}
+.e5Panel{margin-top:18px;background:linear-gradient(150deg,#FFFDF7,#F4EADA);border:1px solid var(--line);
+  border-radius:18px;padding:28px;animation:fadeUp .45s ease}
+.e5Panel h4{font-family:var(--serif);font-size:21px;color:var(--terra);margin-bottom:10px}
+.e5Panel p{font-size:14.5px;color:#5C4B3A;font-weight:300}
+
+/* features */
+.featList{display:grid;gap:16px}
+.feat{display:grid;grid-template-columns:96px 1fr auto;gap:26px;align-items:center;
+  background:rgba(255,253,247,.05);border:1px solid rgba(228,200,122,.2);border-radius:20px;padding:26px 30px;transition:.35s;cursor:pointer}
+.feat:hover{background:rgba(228,200,122,.1);border-color:rgba(228,200,122,.55);transform:translateX(8px)}
+.feat .fn{font-family:var(--serif);font-size:46px;font-weight:900;color:rgba(228,200,122,.4);line-height:1}
+.feat h4{font-family:var(--serif);font-size:21px;color:#FFF3E0;margin-bottom:6px}
+.feat p{font-size:14px;color:#C0AE96;font-weight:300;max-width:760px}
+.feat .plus{width:34px;height:34px;border-radius:50%;border:1px solid rgba(228,200,122,.4);display:grid;place-items:center;
+  color:var(--gold-soft);font-size:20px;transition:.35s;flex-shrink:0}
+.feat:hover .plus{background:var(--gold-soft);color:var(--espresso);transform:rotate(90deg)}
+.featExtra{max-height:0;overflow:hidden;transition:max-height .5s ease;font-size:13.5px;color:#C0AE96}
+.feat.open .featExtra{max-height:200px;margin-top:12px;padding-top:12px;border-top:1px dashed rgba(228,200,122,.28)}
+.feat.open{background:rgba(228,200,122,.13)}
+
+/* workshop */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:36px}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;position:relative;overflow:hidden}
+.step .sn{position:absolute;right:14px;top:2px;font-family:var(--serif);font-size:64px;font-weight:900;color:rgba(184,84,51,.08)}
+.step h5{font-family:var(--serif);font-size:18px;color:var(--terra);margin-bottom:8px}
+.step p{font-size:13.5px;color:#6B5A48;font-weight:300}
+.fieldLabel{font-size:11.5px;letter-spacing:.22em;color:var(--terra);font-weight:500;margin-bottom:10px;display:block}
+input.txt,textarea.txt,select.txt{width:100%;border:1.5px solid var(--line);border-radius:12px;background:#FFFDF8;
+  padding:14px 16px;font-family:var(--sans);font-size:14.5px;color:var(--ink);transition:.25s;resize:vertical}
+input.txt:focus,textarea.txt:focus,select.txt:focus{outline:none;border-color:var(--terra);box-shadow:0 0 0 4px rgba(184,84,51,.1)}
+.chipRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.wChip{border:1px dashed rgba(184,84,51,.45);background:rgba(228,200,122,.14);color:var(--espresso);
+  border-radius:999px;padding:5px 13px;font-size:12.5px;cursor:pointer;transition:.22s;font-family:var(--sans)}
+.wChip:hover{background:var(--terra);color:#FFF3E4;border-style:solid;transform:translateY(-2px)}
+.foodRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.senseGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:26px}
+.senseCard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;transition:.3s}
+.senseCard:focus-within{border-color:var(--terra);box-shadow:0 0 0 4px rgba(184,84,51,.08)}
+.senseTop{display:flex;align-items:center;gap:13px;margin-bottom:6px}
+.senseIco{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex-shrink:0}
+.senseIco svg{width:24px;height:24px;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.senseTop h5{font-family:var(--serif);font-size:18px;color:var(--espresso)}
+.senseTop small{display:block;font-size:11px;letter-spacing:.16em;color:var(--gold)}
+.guide{font-size:12.5px;color:#8B7763;font-weight:300;margin:6px 0 12px;line-height:1.7}
+.count{text-align:right;font-size:11.5px;color:#A08D78;margin-top:6px;letter-spacing:.06em}
+.aiBox{margin-top:28px;background:linear-gradient(155deg,#2A2018,#191310);border-radius:20px;padding:30px;color:#E8DCC8}
+.aiBox h4{font-family:var(--serif);font-size:21px;color:var(--gold-soft);margin-bottom:8px}
+.aiBox p.small{font-size:13px;color:#B6A48C;font-weight:300;margin-bottom:18px}
+pre.promptOut{background:rgba(255,253,247,.06);border:1px solid rgba(228,200,122,.28);border-radius:14px;
+  padding:20px;font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12.8px;line-height:1.85;
+  white-space:pre-wrap;word-break:break-word;color:#EFE3CE;max-height:320px;overflow:auto}
+.aiActions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.btnGold{background:var(--gold);color:#241B12;font-weight:500}
+.btnGold:hover{background:var(--gold-soft);transform:translateY(-3px)}
+.btnLine{background:transparent;border:1.5px solid rgba(228,200,122,.5);color:var(--gold-soft)}
+.btnLine:hover{background:rgba(228,200,122,.16)}
+.sampleBox{margin-top:24px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--paper)}
+.sampleHead{padding:18px 24px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(90deg,rgba(201,153,47,.14),transparent);font-family:var(--serif);font-size:18px;color:var(--espresso)}
+.sampleBody{max-height:0;overflow:hidden;transition:max-height .6s ease}
+.sampleIn{padding:8px 28px 30px;font-family:var(--serif);font-size:16px;line-height:2.15;color:#4A3B2C}
+.sampleIn .sTag{display:inline-block;font-family:var(--sans);font-size:11px;letter-spacing:.16em;color:#FFF3E4;
+  background:var(--terra);padding:2px 10px;border-radius:6px;margin:16px 0 4px}
+
+/* quiz */
+.quizTop{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;margin-bottom:28px}
+.quizBar{flex:1;min-width:220px;height:8px;border-radius:99px;background:rgba(255,253,247,.14);overflow:hidden}
+.quizBar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--terra-soft));transition:.5s}
+.qCard{background:rgba(255,253,247,.055);border:1px solid rgba(228,200,122,.2);border-radius:20px;padding:28px;margin-bottom:18px;transition:.3s}
+.qCard.answered{border-color:rgba(228,200,122,.42)}
+.qNum{font-size:11.5px;letter-spacing:.24em;color:var(--gold-soft);margin-bottom:10px}
+.qText{font-family:var(--serif);font-size:19px;color:#FFF5E6;margin-bottom:20px;line-height:1.7}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:14px;align-items:flex-start;text-align:left;background:rgba(255,253,247,.05);
+  border:1px solid rgba(228,200,122,.22);border-radius:13px;padding:14px 18px;cursor:pointer;
+  color:#E4D7C2;font-size:14.5px;font-family:var(--sans);transition:.25s;line-height:1.7}
+.opt:hover:not(:disabled){background:rgba(228,200,122,.16);transform:translateX(5px)}
+.opt .k{flex:0 0 26px;height:26px;border-radius:50%;border:1px solid rgba(228,200,122,.4);display:grid;place-items:center;
+  font-size:12px;color:var(--gold-soft);font-family:var(--serif)}
+.opt.correct{background:rgba(95,107,69,.32);border-color:#93A06F;color:#EAF0DC}
+.opt.correct .k{background:#93A06F;border-color:#93A06F;color:#20261A}
+.opt.wrong{background:rgba(184,84,51,.28);border-color:var(--terra-soft);color:#F6DDD2}
+.opt.wrong .k{background:var(--terra);border-color:var(--terra);color:#FFF}
+.opt:disabled{cursor:default}
+.expl{margin-top:14px;font-size:13.5px;color:#C6B49C;background:rgba(0,0,0,.2);border-left:3px solid var(--gold);
+  border-radius:0 10px 10px 0;padding:13px 17px;display:none;font-weight:300;line-height:1.8}
+.expl.show{display:block;animation:fadeUp .4s ease}
+.result{margin-top:26px;background:linear-gradient(150deg,rgba(228,200,122,.2),rgba(184,84,51,.14));
+  border:1px solid rgba(228,200,122,.4);border-radius:22px;padding:36px;text-align:center;display:none}
+.result.show{display:block;animation:fadeUp .6s ease}
+.result .big{font-family:var(--serif);font-size:64px;font-weight:900;color:var(--gold-soft);line-height:1}
+.result h4{font-family:var(--serif);font-size:24px;color:#FFF5E6;margin:12px 0 8px}
+.result p{font-size:14px;color:#C6B49C;font-weight:300}
+
+/* glossary */
+.glGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.gl{border:1px solid var(--line);border-radius:14px;background:var(--paper);overflow:hidden}
+.glH{padding:17px 22px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:.25s}
+.glH:hover{background:rgba(201,153,47,.1)}
+.glH b{font-family:var(--serif);font-size:16.5px;color:var(--espresso)}
+.glH i{font-style:normal;color:var(--terra);font-size:19px;transition:.3s}
+.gl.open .glH i{transform:rotate(45deg)}
+.glB{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.glB p{padding:0 22px 19px;font-size:13.8px;color:#6B5A48;font-weight:300}
+
+/* footer */
+footer{background:linear-gradient(160deg,#241B14,#14100C);color:#B8A68E;padding:70px 24px 40px;position:relative;z-index:2}
+.footInner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px}
+footer h5{font-family:var(--serif);color:#FFF3E0;font-size:19px;margin-bottom:14px}
+footer p,footer li{font-size:13.5px;font-weight:300;line-height:2}
+footer ul{list-style:none}
+footer a{color:#C9B79F;text-decoration:none;transition:.25s}
+footer a:hover{color:var(--gold-soft)}
+.footBot{max-width:1180px;margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(228,200,122,.18);
+  font-size:12px;letter-spacing:.1em;color:#7E6E5B;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+
+/* progress widget */
+#prog{position:fixed;right:22px;bottom:22px;z-index:950;width:74px;height:74px;border-radius:50%;
+  background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);display:grid;place-items:center;cursor:pointer;transition:.3s}
+#prog:hover{transform:scale(1.07)}
+#prog svg{position:absolute;inset:0;transform:rotate(-90deg)}
+#prog .pv{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--terra)}
+#prog .pl{font-size:8.5px;letter-spacing:.14em;color:#9B8873;margin-top:-3px}
+#toTop{position:fixed;right:26px;bottom:108px;z-index:950;width:44px;height:44px;border-radius:50%;
+  background:var(--espresso);color:var(--gold-soft);border:none;cursor:pointer;font-size:17px;opacity:0;pointer-events:none;transition:.35s}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{background:var(--terra);color:#FFF}
+.toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,90px);z-index:1200;background:var(--espresso);
+  color:var(--gold-soft);padding:13px 28px;border-radius:999px;font-size:13.5px;letter-spacing:.06em;
+  box-shadow:var(--shadow);opacity:0;transition:.45s cubic-bezier(.2,.8,.2,1)}
+.toast.show{transform:translate(-50%,0);opacity:1}
+
+/* responsive */
+@media(max-width:1080px){
+  .typeGrid{grid-template-columns:repeat(3,1fr)}
+  .srcGrid,.era5{grid-template-columns:repeat(3,1fr)}
+  .heroInner{grid-template-columns:1fr;gap:44px}
+  .heroArt{order:-1}
+  .vennWrap{grid-template-columns:1fr}
+  .meanGrid{grid-template-columns:1fr}
+  .culGrid{grid-template-columns:1fr}
+  .glGrid{grid-template-columns:1fr}
+  .footInner{grid-template-columns:1fr;gap:30px}
+  .feat{grid-template-columns:64px 1fr;gap:16px}
+  .feat .plus{display:none}
+}
+@media(max-width:680px){
+  section{padding:74px 18px}
+  .hero{padding:110px 18px 50px}
+  .typeGrid{grid-template-columns:repeat(2,1fr)}
+  .srcGrid,.era5,.steps{grid-template-columns:1fr}
+  .matchCols{grid-template-columns:1fr}
+  .typeDetail{grid-template-columns:1fr}
+  .tdSeal{width:72px;height:72px;font-size:23px}
+  .navInner{padding:10px 16px;gap:12px}
+  .brandTxt span{display:none}
+  .tlItem{padding-left:56px}
+  .timeline::before{left:16px}
+  .tlDot{left:4px}
+  #prog{width:62px;height:62px;right:14px;bottom:14px}
+  #toTop{right:18px;bottom:88px}
+  .floatTag{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="scrollBar"></div>
+
+<header class="nav">
+  <div class="navInner">
+    <a class="brand" href="#top">
+      <span class="seal">食</span>
+      <span class="brandTxt"><b>飲食文學堂</b><span>Food &amp; Literature</span></span>
+    </a>
+    <nav class="navLinks" id="navLinks">
+      <a href="#meaning">飲食三義</a>
+      <a href="#define">書寫 vs 文學</a>
+      <a href="#culture">文化基礎</a>
+      <a href="#classic">傳統十類</a>
+      <a href="#taiwan">臺灣概談</a>
+      <a href="#features">五大特色</a>
+      <a href="#workshop">五感工作坊</a>
+      <a href="#quiz">學習檢核</a>
+      <a href="#glossary">名詞速查</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero" id="top">
+  <div class="heroBg"></div>
+  <div class="heroGrid"></div>
+  <div class="heroInner">
+    <div>
+      <div class="eyebrow">A Culinary Literature Course</div>
+      <h1 class="heroTitle">飲食，<br>是<em>可以品嚐</em>的<br>文學。</h1>
+      <p class="heroSub">從《山家清供》到臺北夜市的一碗牛肉麵——本單元帶你理解「飲食」的三重意義、辨明「飲食書寫」與「飲食文學」的分際，走過中國傳統十大書寫類型與臺灣飲食文學的時代分期，最後親手完成一篇五感摹寫創作。</p>
+      <div class="heroMeta">
+        <span class="pill">9 個學習站點</span>
+        <span class="pill">1 場配對遊戲</span>
+        <span class="pill">10 題自我檢核</span>
+        <span class="pill">五感創作工作坊</span>
+      </div>
+      <div class="heroCta">
+        <a class="btn btnPrimary" href="#meaning">開始學習 →</a>
+        <a class="btn btnGhost" href="#workshop">直接進行創作練習</a>
+      </div>
+    </div>
+
+    <div class="heroArt">
+      <!-- SVG illustration: bowl, steam, chopsticks, book -->
+      <svg viewBox="0 0 460 420" xmlns="http://www.w3.org/2000/svg" aria-label="飲食文學插畫">
+        <defs>
+          <linearGradient id="gBowl" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#B85433"/><stop offset="1" stop-color="#7A3550"/>
+          </linearGradient>
+          <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#E4C87A"/><stop offset="1" stop-color="#C9992F"/>
+          </linearGradient>
+          <linearGradient id="gBook" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FFFDF7"/><stop offset="1" stop-color="#EADCC4"/>
+          </linearGradient>
+        </defs>
+
+        <circle cx="230" cy="200" r="176" fill="none" stroke="url(#gGold)" stroke-width="1.2" stroke-dasharray="4 9" opacity=".85"/>
+        <circle cx="230" cy="200" r="146" fill="rgba(255,253,247,.5)" stroke="rgba(184,84,51,.22)" stroke-width="1"/>
+
+        <!-- steam -->
+        <g stroke="#C9992F" stroke-width="3.2" fill="none" stroke-linecap="round" opacity=".85">
+          <path d="M178 128 C166 108 190 96 178 74 C170 58 184 48 180 36"/>
+          <path d="M230 116 C218 96 242 84 230 62 C222 46 236 36 232 24"/>
+          <path d="M282 128 C270 108 294 96 282 74 C274 58 288 48 284 36"/>
+        </g>
+
+        <!-- bowl -->
+        <path d="M110 168 H350 C350 246 300 296 230 296 C160 296 110 246 110 168 Z" fill="url(#gBowl)"/>
+        <ellipse cx="230" cy="168" rx="120" ry="24" fill="#F6E4CB"/>
+        <ellipse cx="230" cy="168" rx="104" ry="17" fill="#D9A441" opacity=".55"/>
+        <path d="M150 200 C170 246 200 268 230 272" stroke="rgba(255,255,255,.28)" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <rect x="196" y="296" width="68" height="12" rx="5" fill="#7A3550"/>
+        <path d="M176 308 H284 L272 322 H188 Z" fill="#5F2B3E"/>
+
+        <!-- chopsticks -->
+        <g stroke="#8E6A3E" stroke-width="6" stroke-linecap="round">
+          <line x1="300" y1="120" x2="392" y2="252"/>
+          <line x1="320" y1="112" x2="410" y2="240"/>
+        </g>
+
+        <!-- book -->
+        <g transform="translate(46,286) rotate(-8)">
+          <rect x="0" y="0" width="132" height="86" rx="7" fill="url(#gBook)" stroke="rgba(59,42,28,.28)"/>
+          <line x1="66" y1="6" x2="66" y2="80" stroke="rgba(59,42,28,.22)"/>
+          <g stroke="rgba(59,42,28,.24)" stroke-width="2.2" stroke-linecap="round">
+            <line x1="14" y1="22" x2="54" y2="22"/><line x1="14" y1="36" x2="48" y2="36"/>
+            <line x1="14" y1="50" x2="54" y2="50"/><line x1="78" y1="22" x2="118" y2="22"/>
+            <line x1="78" y1="36" x2="112" y2="36"/><line x1="78" y1="50" x2="118" y2="50"/>
+          </g>
+          <rect x="96" y="58" width="24" height="24" rx="4" fill="#B85433" opacity=".9"/>
+        </g>
+
+        <!-- seal -->
+        <g transform="translate(356,306)">
+          <rect x="0" y="0" width="58" height="58" rx="9" fill="#B85433"/>
+          <rect x="5" y="5" width="48" height="48" rx="6" fill="none" stroke="rgba(255,243,226,.55)" stroke-width="1.6"/>
+          <text x="29" y="41" text-anchor="middle" font-family="Noto Serif TC, serif" font-size="30" font-weight="900" fill="#FFF3E2">味</text>
+        </g>
+      </svg>
+
+      <div class="floatTag ft1"><b>描述義</b>飲食是什麼</div>
+      <div class="floatTag ft2"><b>符號化</b>精神與情感的表徵</div>
+      <div class="floatTag ft3"><b>五感摹寫</b>從出現到入口</div>
+    </div>
+  </div>
+  <div class="scrollHint">SCROLL<i></i></div>
+</div>
+
+<!-- ================= 01 飲食三義 ================= -->
+<section id="meaning" data-sec>
+  <div class="wrap">
+    <div class="secHead reveal">
+      <div class="secNum">01 — DEFINITION</div>
+      <h2 class="secTitle">「飲食」的三重意義</h2>
+      <p class="secLead">飲食看似只是吃與喝，但在語言與文化的層次上，它同時具備「描述」「詮釋」與「評價」三種意義。點擊卡片展開完整說明。</p>
+      <div class="rule"></div>
+    </div>
+
+    <div class="meanGrid" id="meanGrid">
+      <article class="meanCard reveal" data-i="0">
+        <div class="mLabel">壹</div>
+        <h3>描述義</h3>
+        <div class="mQ">飲食「是什麼」</div>
+        <p>可作為動詞：透過吃、喝、吞、嚥等行為維持生理機能；作名詞時，則指食物與飲食所用的器物。</p>
+        <div class="mMore">總括而言，飲食可泛指一切與「吃喝吞嚥」相關的行為與事物。這是最基礎、最中性的定義層次，回答的是事實性的問題：飲食是維持生命的根本。</div>
+        <div class="mHint">點擊展開 ▾</div>
+      </article>
+
+      <article class="meanCard reveal" data-i="1">
+        <div class="mLabel">貳</div>
+        <h3>詮釋義</h3>
+        <div class="mQ">飲食「代表什麼」</div>
+        <p>隨著食物生產過程與飲食行為的不同面向，衍生出產業、禮儀、風俗、心理、文化等多元意義。</p>
+        <div class="mMore">飲食產業、飲食禮儀、飲食風俗、飲食心理學、飲食文化……這些複雜的「自然因素」與「人文因素」彼此交織，形塑出不同的飲食行為與文化詮釋。</div>
+        <div class="mHint">點擊展開 ▾</div>
+      </article>
+
+      <article class="meanCard reveal" data-i="2">
+        <div class="mLabel">參</div>
+        <h3>評價義</h3>
+        <div class="mQ">飲食「有何價值」</div>
+        <p>飲食進入人的生活後成為社會集體活動，形成文化，更滲入文學而成為表意符號。</p>
+        <div class="mMore">它是歷史的積累，更是重要的人文資產。飲食看似尋常的生活必需，卻在價值層次上被賦予審美、倫理與文化傳承的意義——這也正是飲食得以成為「文學題材」的關鍵。</div>
+        <div class="mHint">點擊展開 ▾</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 書寫 vs 文學 ================= -->
+<section id="define" class="alt" data-sec>
+  <div class="wrap">
+    <div class="secHead reveal">
+      <div class="secNum">02 — CONCEPT MAP</div>
+      <h2 class="secTitle">從「飲食書寫」到「飲食文學」</h2>
+      <p class="secLead">三者是層層縮小的集合關係。點擊下圖任一區域，檢視它的定義與邊界。</p>
+      <div class="rule"></div>
+    </div>
+
+    <div class="vennWrap">
+      <div class="vennBox reveal">
+        <svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="clipL"><circle cx="212" cy="192" r="108"/></clipPath>
+          </defs>
+          <!-- 飲食書寫 大集合 -->
+          <g class="vzone" data-zone="writing">
+            <ellipse cx="300" cy="192" rx="284" ry="168" fill="rgba(95,107,69,.13)" stroke="#5F6B45" stroke-width="2" stroke-dasharray="7 6"/>
+            <rect x="16" y="24" width="568" height="336" fill="transparent"/>
+          </g>
+          <!-- 飲食文獻 -->
+          <g class="vzone" data-zone="doc">
+            <circle cx="212" cy="192" r="108" fill="rgba(184,84,51,.16)" stroke="#B85433" stroke-width="2"/>
+          </g>
+          <!-- 飲食文學 -->
+          <g class="vzone" data-zone="lit">
+            <circle cx="388" cy="192" r="108" fill="rgba(201,153,47,.2)" stroke="#C9992F" stroke-width="2.4"/>
+          </g>
+          <!-- 交集視覺 -->
+          <circle cx="388" cy="192" r="108" fill="rgba(201,153,47,.42)" clip-path="url(#clipL)" pointer-events="none"/>
+          <text class="vLabel" x="300" y="58" text-anchor="middle" font-size="21" fill="#5F6B45">廣義的「飲食書寫」</text>
+          <text class="vLabel" x="176" y="188" text-anchor="middle" font-size="19" fill="#8E3B22">飲食文獻</text>
+          <text x="176" y="212" text-anchor="middle" font-size="11.5" fill="#8E3B22" opacity=".8">史學・哲學・科學</text>
+          <text class="vLabel" x="424" y="188" text-anchor="middle" font-size="19" fill="#8A6512">飲食文學</text>
+          <text x="424" y="212" text-anchor="middle" font-size="11.5" fill="#8A6512" opacity=".85">文學手法・藝術形式</text>
+          <text x="300" y="340" text-anchor="middle" font-size="12" fill="#8B7763" letter-spacing="2">飲食文化 ＝ 飲食文獻 ＋ 飲食文學</text>
+        </svg>
+      </div>
+
+      <div class="vPanel reveal" id="vPanel">
+        <h4 id="vTitle">廣義的「飲食書寫」</h4>
+        <p id="vBody">意指與飲食相關的書寫題材與表現類型，涵蓋文學、史學、哲學、科學等不同領域。它牽涉時代、環境、語言、社會文化等背景因素，可能分別或同時兼具「抒情性」與「功能性」。飲食書寫是一個新興議題，不論在創作型態、表現方式、主題類型都十分多元。</p>
+        <div class="tagrow" id="vTags">
+          <span>新興議題</span><span>跨領域</span><span>抒情性 × 功能性</span><span>題材多元</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="culGrid reveal" style="margin-top:34px">
+      <div class="card">
+        <div class="secNum" style="color:var(--terra)">核心定義</div>
+        <h4 style="font-family:var(--serif);font-size:21px;color:var(--espresso);margin:10px 0 12px">什麼是「飲食文學」？</h4>
+        <p style="font-size:14.5px;color:#5C4B3A;font-weight:300">指以<strong style="color:var(--terra)">特定文學手法與藝術形式</strong>，表現飲食題材所代表的<strong style="color:var(--terra)">符號意義</strong>。它可能是作者思想、情感與想像的表現；也可能是再現某時某地的飲食文化存在情境。</p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--olive)">
+        <div class="secNum" style="color:var(--olive)">判準提醒</div>
+        <h4 style="font-family:var(--serif);font-size:21px;color:var(--espresso);margin:10px 0 12px">如何分辨文獻與文學？</h4>
+        <p style="font-size:14.5px;color:#5C4B3A;font-weight:300">飲食文化中的飲食書寫，同時包含「飲食文獻」與「飲食文學」。其中<strong style="color:var(--olive)">飲食文學必須更精確地具備文學特質及藝術表現</strong>——不只是記錄，更要能喚起感受與想像。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 文化基礎 ================= -->
+<section id="culture" class="dark" data-sec>
+  <div class="wrap">
+    <div class="secHead reveal">
+      <div class="secNum">03 — FOUNDATION</div>
+      <h2 class="secTitle">「飲食文學」的文化基礎</h2>
+      <p class="secLead">飲食文學並非憑空而生，它建立在兩條地基之上：一是古代傳統文化基礎，二是發生時代的社會情境。</p>
+      <div class="rule" style="background:linear-gradient(90deg,var(--gold-soft),var(--terra-soft),transparent)"></div>
+    </div>
+
+    <div class="culGrid">
+      <div class="culItem reveal">
+        <div class="culIcon"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H19v3H6.5z"/></svg></div>
+        <div>
+          <h4>古代傳統文化基礎</h4>
+          <p>在寫作的歷史上，飲食一直沒有缺席過，只是隨著時代與社會背景的不同，被賦予了不同的功能與意義。從農書本草到食單筆記，構成了深厚的書寫傳統。</p>
+        </div>
+      </div>
+      <div class="culItem reveal">
+        <div class="culIcon"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-5h6v5"/></svg></div>
+        <div>
+          <h4>發生時代的社會情境</h4>
+          <p>政治、經濟、都市化與消費文化等當下條件，決定了作家如何書寫食物、為何書寫食物，以及讀者期待從中讀到什麼。</p>
+        </div>
+      </div>
+      <div class="culItem reveal">
+        <div class="culIcon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a7 7 0 0 1 14 0c0 5.4-7 10-7 10z"/><circle cx="12" cy="11" r="2.6"/></svg></div>
+        <div>
+          <h4>從生存到表徵的轉化</h4>
+          <p>飲食是維持生命的根本；藉由文學的<strong style="color:var(--gold-soft)">抽象化、符號化</strong>，它成為了精神與情感的表徵——一碗湯可以是家鄉，一塊糖可以是童年。</p>
+        </div>
+      </div>
+      <div class="culItem reveal">
+        <div class="culIcon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg></div>
+        <div>
+          <h4>功能與意義的流動</h4>
+          <p>同一道食物，在不同時代可以被理解為養生之方、禮制之器、經濟之貨、懷鄉之物或消費之商品。理解這層流動，才能真正讀懂飲食文學。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 中國傳統十類 ================= -->
+<section id="classic" data-sec>
+  <div class="wrap">
+    <div class="secHead reveal">
+      <div class="secNum">04 — CLASSIFICATION</div>
+      <h2 class="secTitle">中國傳統飲食書寫 · 十大類型</h2>
+      <p class="secLead">飲食書寫在中國傳統中早已枝繁葉茂。點選任一類型，查看其代表典籍與書寫特色。</p>
+      <div class="rule"></div>
+    </div>
+
+    <div class="typeGrid reveal" id="typeGrid"></div>
+    <div class="typeDetail reveal" id="typeDetail"></div>
+
+    <!-- matching game -->
+    <div class="gameBox reveal">
+      <div class="gameHead">
+        <div>
+          <h4>🎯 配對挑戰：典籍 × 類型</h4>
+          <p>先點左側一本書，再點右側一個類型。答對即鎖定，全部答對可獲得勳章。</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <span class="scoreChip" id="gameScore">進度 0 / 6</span>
+          <button class="btn btnGhost" style="padding:10px 20px;font-size:12.5px" id="gameReset">重新開始</button>
+        </div>
+      </div>
+      <div class="matchCols">
+        <div class="matchCol"><h5>代表典籍</h5><div id="gBooks" style="display:flex;flex-direction:column;gap:11px"></div></div>
+        <div class="matchCol"><h5>書寫類型</h5><div id="gCats" style="display:flex;flex-direction:column;gap:11px"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 臺灣飲食文學 ================= -->
+<section id="taiwan" class="alt" data-sec>
+  <div class="wrap">
+    <div class="secHead reveal">
+      <div class="secNum">05 — TAIWAN</div>
+      <h2 class="secTitle">臺灣飲食文學概談</h2>
+      <p class="secLead">政治解嚴、經濟起飛、都市化與消費社會，共同催生了臺灣飲食文學的繽紛面貌。</p>
+      <div class="rule"></div>
+    </div>
+
+    <!-- factors -->
+    <h3 style="font-family:var(--serif);font-size:22px;color:var(--espresso);margin-bottom:6px" class="reveal">一、形成的三大因素</h3>
+    <p style="font-size:13.5px;color:#8B7763;margin-bottom:20px" class="reveal">點擊切換查看各因素的詳細脈絡</p>
+    <div class="tabs reveal" id="facTabs">
+      <button class="tab on" data-t="0">政治改革帶動社會轉型</button>
+      <button class="tab" data-t="1">經濟發展・產業轉型・都市化</button>
+      <button class="tab" data-t="2">消費社會情境</button>
+    </div>
+    <div class="reveal" id="facPanels">
+      <div class="tabPanel on card">
+        <h4>政治改革帶動的社會轉型</h4>
+        <p>1945 年日本無條件投降、1949 年戒嚴、1950–60 年代白色恐怖、1979 年美麗島事件、1987 年解嚴。隨著政治的改革開放，社會各層面逐漸鬆綁，各階層人民得以輕易獲得更多異國旅遊與飲食經驗，也促使作家開始關注社會不同層面的寫作材料，飲食題材於是順理成章地成為作家新寵。</p>
+      </div>
+      <div class="tabPanel card">
+        <h4>經濟發展帶來的產業轉型與都市化現象</h4>
+        <p>由於經濟成長、物質提升，商人渴望自由的貿易往來、學生渴望自由選擇所學、中產階級更渴望自由的生活消費型態，社會日漸走向以消費者為主導的商業型態。加工出口區的設立吸引大量農村人口遷入都市，形成都市化發展，也改變了人們「吃什麼、在哪裡吃、與誰吃」的日常結構。</p>
+      </div>
+      <div class="tabPanel card">
+        <h4>消費社會情境下形成的飲食文學</h4>
+        <p>社會開始崇尚消費主義，凡事講求快速、新潮。文章也逐漸成為消費性的商品，寫作與閱讀不再只講求情志，知識性、導覽式、圖像化的題材成為最大宗——飲食書寫因此與媒體、出版、餐飲產業緊密結合。</p>
+      </div>
+    </div>
+
+    <!-- sources -->
+    <h3 style="font-family:var(--serif);font-size:22px;color:var(--espresso);margin:56px 0 20px" class="reveal">二、題材的五大來源</h3>
+    <div class="srcGrid reveal">
+      <div class="srcCard"><div class="sn">壹</div><h5>中國飲食文化<br>的縮影</h5></div>
+      <div class="srcCard"><div class="sn">貳</div><h5>旅外經驗的<br>飲食記憶</h5></div>
+      <div class="srcCard"><div class="sn">參</div><h5>傳統的<br>市場文化</h5></div>
+      <div class="srcCard"><div class="sn">肆</div><h5>異國飲食文化<br>的匯集</h5></div>
+      <div class="srcCard"><div class="sn">伍</div><h5>頂級的<br>飲食消費文化</h5></div>
+    </div>
+
+    <!-- timeline -->
+    <h3 style="font-family:var(--serif);font-size:22px;color:var(--espresso);margin:56px 0 8px" class="reveal">三、發展分期</h3>
+    <p style="font-size:13.5px;color:#8B7763;margin-bottom:26px" class="reveal">點擊各時期展開說明與代表作品</p>
+    <div class="timeline reveal" id="timeline"></div>
+
+    <!-- 1990 five types -->
+    <h3 style="font-family:var(--serif);font-size:22px;color:var(--espresso);margin:52px 0 8px" class="reveal">四、1990 年以後的五大書寫類型</h3>
+    <p style="font-size:13.5px;color:#8B7763" class="reveal">繽紛多元的時代，飲食文學分化出五種鮮明的路徑</p>
+    <div class="era5 reveal" id="era5"></div>
+    <div class="e5Panel reveal" id="e5Panel"></div>
+  </div>
+</section>
+
+<!-- ================= 06 五大特色 ================= -->
+<section id="features" class="dark" data-sec>
+  <div class="wrap">
+    <div class="secHead reveal">
+      <div class="secNum">06 — TECHNIQUE</div>
+      <h2 class="secTitle">飲食文學的五大寫作特色</h2>
+      <p class="secLead">飲食文學是「飲食」與「文學」的結合：除了極力描寫飲食的滋味與樂趣，也需要有主題的深度，才能產生傑出的作品。</p>
+      <div class="rule" style="background:linear-gradient(90deg,var(--gold-soft),var(--terra-soft),transparent)"></div>
+    </div>
+    <div class="featList" id="featList"></div>
+  </div>
+</section>
+
+<!-- ================= 07 工作坊 ================= -->
+<section id="workshop" data-sec>
+  <div class="wrap">
+    <div class="secHead reveal">
+      <div class="secNum">07 — WRITING LAB</div>
+      <h2 class="secTitle">創作練習：一份食物的五感摹寫</h2>
+      <p class="secLead">選擇一道你最喜歡或印象深刻的食物，運用視覺、聽覺、嗅覺、味覺、觸覺，詳細描寫它從「出現」到「入口」的過程。內容會自動存檔於你的裝置。</p>
+      <div class="rule"></div>
+    </div>
+
+    <div class="steps reveal">
+      <div class="step"><div class="sn">1</div><h5>選定食物</h5><p>挑一道承載記憶或感官印象最鮮明的料理，範圍越具體越好寫。</p></div>
+      <div class="step"><div class="sn">2</div><h5>感官摹寫</h5><p>依序寫下五感細節，聚焦「從出現到入口」的時間軸。</p></div>
+      <div class="step"><div class="sn">3</div><h5>結合生成式 AI</h5><p>將你的素材轉為提示詞，讓 AI 協助潤飾、擴寫或生成配圖靈感。</p></div>
+    </div>
+
+    <div class="card reveal">
+      <label class="fieldLabel" for="foodName">STEP 1 · 我要書写的食物</label>
+      <input class="txt" id="foodName" placeholder="例如：外婆的紅燒肉、夜市蚵仔煎、清晨的一碗陽春麵⋯⋯">
+      <div class="foodRow" id="foodRow"></div>
+
+      <label class="fieldLabel" for="foodScene" style="margin-top:24px">情境與記憶（它出現在什麼時候、什麼地方、和誰一起？）</label>
+      <input class="txt" id="foodScene" placeholder="例如：冬日深夜的巷口麵攤，攤主是一對老夫婦，蒸汽模糊了玻璃⋯⋯">
+    </div>
+
+    <label class="fieldLabel reveal" style="margin-top:34px">STEP 2 · 五感摹寫（點擊詞彙可直接加入內容）</label>
+    <div class="senseGrid" id="senseGrid"></div>
+
+    <div class="aiBox reveal">
+      <h4>STEP 3 · 生成式 AI 應用</h4>
+      <p class="small">下方會依你填寫的內容自動組裝出可直接貼到生成式 AI 的提示詞，包含「文學潤飾」與「圖像生成」兩組指令。</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+        <button class="btn btnGold" id="btnBuild" style="padding:12px 24px">✦ 生成我的提示詞</button>
+        <button class="btn btnLine" id="btnCopy" style="padding:12px 24px">複製提示詞</button>
+        <button class="btn btnLine" id="btnDownload" style="padding:12px 24px">下載我的作品 (.txt)</button>
+        <button class="btn btnLine" id="btnClear" style="padding:12px 24px">清空重填</button>
+      </div>
+      <pre class="promptOut" id="promptOut">（尚未生成。完成上方五感描寫後，點擊「生成我的提示詞」。）</pre>
+      <div style="margin-top:18px;font-size:12.5px;color:#A2907A;font-weight:300;line-height:1.9">
+        💡 <strong style="color:var(--gold-soft)">提示技巧：</strong>記得在提示詞中指定「文體（散文／新詩）」、「字數」、「人稱與時態」、「想強調的情感基調」，並要求 AI「保留我原本的五感細節，不要凭空添加事實」，才能讓生成結果貼近你的經驗。
+      </div>
+    </div>
+
+    <div class="sampleBox reveal">
+      <div class="sampleHead" id="sampleHead"><span>📖 範文欣賞：〈巷口的陽春麵〉五感摹寫示例</span><span style="color:var(--terra);font-size:20px" id="sampleIco">＋</span></div>
+      <div class="sampleBody" id="sampleBody"><div class="sampleIn" id="sampleIn"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 08 測驗 ================= -->
+<section id="quiz" class="dark" data-sec>
+  <div class="wrap">
+    <div class="secHead reveal">
+      <div class="secNum">08 — CHECKPOINT</div>
+      <h2 class="secTitle">學習檢核 · 十題自我測驗</h2>
+      <p class="secLead">作答後立即顯示正解與解說。完成全部題目即可獲得學習總結。</p>
+      <div class="rule" style="background:linear-gradient(90deg,var(--gold-soft),var(--terra-soft),transparent)"></div>
+    </div>
+
+    <div class="quizTop reveal">
+      <span style="font-size:12.5px;letter-spacing:.16em;color:var(--gold-soft)" id="quizCount">已完成 0 / 10</span>
+      <div class="quizBar"><i id="quizFill"></i></div>
+      <button class="btn btnLine" style="padding:9px 20px;font-size:12.5px" id="quizReset">重測</button>
+    </div>
+
+    <div id="quizList"></div>
+    <div class="result" id="quizResult">
+      <div class="big" id="resScore">0</div>
+      <h4 id="resTitle">測驗完成</h4>
+      <p id="resText"></p>
+      <button class="btn btnGold" style="margin-top:20px;padding:12px 26px" id="resRetry">再測一次</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 09 名詞速查 ================= -->
+<section id="glossary" class="alt" data-sec>
+  <div class="wrap">
+    <div class="secHead reveal">
+      <div class="secNum">09 — GLOSSARY</div>
+      <h2 class="secTitle">名詞與書單速查</h2>
+      <p class="secLead">複習關鍵概念，並收藏課堂出現的重要典籍與作家作品。</p>
+      <div class="rule"></div>
+    </div>
+    <div class="glGrid" id="glGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footInner">
+    <div>
+      <h5>飲食文學堂</h5>
+      <p>本網頁內容整理自課程講義〈飲食與飲食文學的定義〉與〈飲食文學補充講義〉，以互動方式重組為自學教材，供課堂複習與創作練習使用。</p>
+      <p style="margin-top:14px;font-family:var(--serif);color:var(--gold-soft);font-size:15px">「飲食是維持生命的根本，藉由文學的抽象化、符號化，成為了精神與情感的表徵。」</p>
+    </div>
+    <div>
+      <h5>快速導覽</h5>
+      <ul>
+        <li><a href="#meaning">飲食的三重意義</a></li>
+        <li><a href="#define">書寫・文獻・文學</a></li>
+        <li><a href="#classic">傳統十大類型</a></li>
+        <li><a href="#taiwan">臺灣飲食文學分期</a></li>
+        <li><a href="#features">五大寫作特色</a></li>
+        <li><a href="#workshop">五感摹寫工作坊</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>學習提示</h5>
+      <ul>
+        <li>‧ 每完成一個站點，導覽列會亮起金色圓點</li>
+        <li>‧ 工作坊內容自動存於瀏覽器</li>
+        <li>‧ 建議順序：定義 → 傳統 → 臺灣 → 特色 → 創作 → 測驗</li>
+        <li>‧ 配對遊戲與測驗可反覆練習</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footBot">
+    <span>FOOD &amp; LITERATURE · INTERACTIVE LEARNING</span>
+    <span>五感摹寫 × 生成式 AI 應用</span>
+  </div>
+</footer>
+
+<div id="prog" title="學習進度">
+  <svg viewBox="0 0 74 74"><circle cx="37" cy="37" r="32" fill="none" stroke="rgba(59,42,28,.12)" stroke-width="5"/>
+  <circle id="progRing" cx="37" cy="37" r="32" fill="none" stroke="#B85433" stroke-width="5" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201"/></svg>
+  <div style="text-align:center;line-height:1.15"><div class="pv" id="progVal">0%</div><div class="pl">PROGRESS</div></div>
+</div>
+<button id="toTop" title="回到頂部">↑</button>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==================== DATA ==================== */
+const TYPES = [
+  {t:"保存語言材料",n:"壹",b:["《方言》","《釋名》"],d:"以訓詁、方言的方式記錄食物與飲食器具的名稱，保存了珍貴的語言材料，讓我們得以追索古人如何「稱呼」滋味。"},
+  {t:"本草農書與生物百科",n:"貳",b:["《齊民要術》","《荔枝譜》"],d:"從農耕、栽培到物產特性的百科式記錄，兼具實用知識與生物觀察，是飲食書寫中最具「科學性」的一支。"},
+  {t:"食貨經濟",n:"參",b:["《史記‧貨殖列傳》","《宣和北苑貢茶錄》"],d:"將食物置於生產、流通與貿易的脈絡中，書寫飲食背後的經濟活動、物資調度與國家財政。"},
+  {t:"飲食制度",n:"肆",b:["《周禮‧天官》","《燒尾食單》"],d:"記錄宮廷與官府的膳食職官、宴饗禮制與菜單規格，反映飲食如何成為權力與身分秩序的展演。"},
+  {t:"醫食養生",n:"伍",b:["《山家清供》","《飲膳正要》"],d:"「藥食同源」的傳統，將食材性味與身體調養結合，書寫清淡素樸的山家滋味與宮廷營養之學。"},
+  {t:"地方人文",n:"陸",b:["《東京夢華錄》","《武林舊事》"],d:"以城市為舞台，追憶市井食肆、節令食俗與繁華舊事，是最貼近「生活現場」的飲食書寫。"},
+  {t:"飲食異事",n:"柒",b:["《博物志》","《饌史》"],d:"搜羅奇聞異食、傳說掌故，滿足對未知滋味的好奇心，帶有濃厚的筆記與志怪色彩。"},
+  {t:"日用百科",n:"捌",b:["《糖霜譜》","《清異錄》"],d:"面向日常生活的知識彙編，記述製糖工藝、食物別名與生活雜識，是古人饮食生活的「工具書」。"},
+  {t:"烹飪與飲饌理論",n:"玖",b:["《食珍錄》","《隨園食單》"],d:"從技術提升到理論，講究火候、調味、搭配與品評標準，直接影響後世的食譜書寫與美食評論。"},
+  {t:"茶酒文化",n:"拾",b:["《茶經》","《酒史》"],d:"茶與酒不只是飲品，更是精神生活與社交儀式的載體，形成自成體系的品鑑美學與文化史。"}
+];
+
+const MATCH = [
+  {book:"《隨園食單》",cat:"烹飪與飲饌理論"},
+  {book:"《東京夢華錄》",cat:"地方人文"},
+  {book:"《糖霜譜》",cat:"日用百科"},
+  {book:"《茶經》",cat:"茶酒文化"},
+  {book:"《山家清供》",cat:"醫食養生"},
+  {book:"《齊民要術》",cat:"本草農書與生物百科"}
+];
+
+const ERAS = [
+  {y:"1950–60 年代",n:"1",t:"懷鄉的飲食書寫",
+   d:"1949 年後兩岸分治，大批外省居民遷移到臺灣，他們對故鄉的懷念形諸於文字，其中對家鄉飲食的回憶佔有重要的份量。食物成為回不去的地理座標。",
+   c:["《中央日報》副刊「家鄉味」專欄"]},
+  {y:"1970–80 年代",n:"2",t:"憶舊、品賞與考證式的飲食書寫",
+   d:"廣泛書寫過去在中國大陸生活的各種飲食經驗，並延伸到對當下臺灣飲食的探索，尋訪各地小吃；或在個人飲食經驗記憶之外，加上對某個食物的典故、歷史、文化的引用與考據，為飲食文學增加知識的面向。",
+   c:["梁實秋《雅舍談吃》","唐魯孫《唐魯孫談吃》","逯耀東《肚大能容：中國飲食文化散記》"]},
+  {y:"1990 年以後",n:"3",t:"繽紛多元的飲食書寫",
+   d:"解嚴後的社會鬆綁、消費文化興盛與出版市場活絡，使飲食書寫分化出記事抒情、尋訪品評、知性論述、創意實踐、詩意虛構等五大類型，題材與體裁都空前多元。",
+   c:["見下方「五大書寫類型」"]}
+];
+
+const ERA5 = [
+  {i:"壹",t:"記事與抒情",d:"記事與抒情是文學的兩大主軸，和飲食互相結合，可以凸顯飲食與人生的互動關係。食物成為記憶的開關，牽動親情、愛情與时光。",b:["林文月《飲膳札記》","張曼娟《黃魚聽雷》"]},
+  {i:"貳",t:"尋訪與品評",d:"飲食文學作家多數也是美食家，他們到處尋訪美食，也樂意提供相關資訊與經驗和讀者分享，通常也帶有品評高下的用意。",b:["舒國治《臺北小吃札記》","焦桐「臺灣味道三部曲」：《臺灣味道》《臺灣肚皮》《臺灣舌頭》"]},
+  {i:"參",t:"知性與論述",d:"這類著作展現了作者知性的一面，也使我們對食物與社會、歷史、人類的文明文化有更深入的了解。",b:["蔡珠兒《南方絳雪》","劉克襄《男人的菜市場》"]},
+  {i:"肆",t:"創意與實踐",d:"對某些作家來說，飲食不只是案頭文章，而是可以實踐的。因此這一類作者兼有廚藝與飲食作家的雙重身分。",b:["韓良露《良露家之味》","韓良憶《廚房裡的音樂會》"]},
+  {i:"伍",t:"詩意與虛構",d:"飲食文學雖以散文類著作為最大宗，但新詩、小說中也有許多飲食相關的作品，以想像力重構食物的意義。",b:["焦桐《完全壯陽食譜》","李昂《鴛鴦春膳》"]}
+];
+
+const FEATURES = [
+  {t:"突出感官印象的描繪",d:"食物講究色香味俱全，寫作飲食文學也需要凸顯各種感官味蕾，細膩描寫食物的外型、擺盤、口感、香氣等，吸引讀者一邊閱讀一邊想像食物的滋味。",
+   e:"實作提示：善用「動詞＋質地詞」，例如「筷子一夾便顫巍巍地散開」，比單純形容「很好吃」更能喚起畫面。"},
+  {t:"融入食譜或烹飪方法",d:"適當的「融入食譜或烹飪方法」是不可或缺的創作小技巧，但並不是將食譜照單全抄，而是附上一些小秘訣，讓讀者讀起來感到親切。",
+   e:"實作提示：把步驟寫成敘事——「火候」「手感」「氣味的轉變」都是故事的一部分，而非條列指令。"},
+  {t:"挖掘飲食與人生的關聯",d:"作者書寫飲食經驗，正是透過聯想、記憶、思考飲食與人生的關係。喜好的食物、烹煮食物的人、用餐的情境，都會引發人們回憶童年或人生特殊的階段，也會跟親情、愛情、友情連結在一起。",
+   e:"實作提示：透過飲食挖掘內在的記憶與象徵意義，能使飲食文學更具深度——問自己「這道菜讓我想起誰？」"},
+  {t:"深度體察本土與異國文化",d:"無論是新奇的異國飲食，還是親切有味的本土飲食，經由作家的接觸和用心觀察，都可以引導讀者認識不同文化的內涵。飲食是體驗文化的最佳途徑之一。",
+   e:"實作提示：寫出食物背後的地理、節氣、族群與階級訊息，讓一道菜成為認識一種文化的入口。"},
+  {t:"以實踐帶動飲食文學新風潮",d:"作家將創作與烹飪合而為一，一本飲食文學的誕生，也代表作家多年投入廚房工作的成果。",
+   e:"實作提示：親手做一次你要書寫的菜，記錄失敗與調整，真實的細節無法憑空想像。"}
+];
+
+const SENSES = [
+  {k:"sight",t:"視覺",en:"SIGHT",c:"#B85433",bg:"rgba(184,84,51,.12)",
+   g:"它端上來時是什麼顏色、形狀、光澤？擺盤如何排列？蒸汽、油光、配菜的對比？",
+   ph:"食器",
+   w:["色澤金黃","晶瑩剔透","油亮泛光","層層分明","擺盤如畫","霧氣裊裊","琥珀色澤","翠綠點綴","湯色清亮","焦褐脆皮"]},
+  {k:"sound",t:"聽覺",en:"SOUND",c:"#C9992F",bg:"rgba(201,153,47,.14)",
+   g:"上桌時有什麼聲響？烹製過程的聲音？咬下第一口的脆響或湯汁的輕響？",
+   ph:"聲響",
+   w:["滋滋作響","咕嘟沸騰","鍋鏟鏗鏘","刀落篤篤","咔嚓脆響","油脂爆裂","細碎咀嚼","湯勺輕碰"]},
+  {k:"smell",t:"嗅覺",en:"SMELL",c:"#5F6B45",bg:"rgba(95,107,69,.13)",
+   g:"最先撲鼻而來的是什麼氣味？香氣的層次如何變化？是否勾起某段記憶的氣味？",
+   ph:"氣味",
+   w:["焦香撲鼻","蒜香濃郁","麻油溫潤","發酵微酸","清甜米香","炭焙煙燻","柑橘清香","辛香竄鼻","奶香繚繞"]},
+  {k:"taste",t:"味覺",en:"TASTE",c:"#7A3550",bg:"rgba(122,53,80,.12)",
+   g:"入口的第一個味道是什麼？中段與餘韻如何變化？鹹甜酸苦鮮的比例與層次？",
+   ph:"滋味",
+   w:["鮮甜回甘","鹹香濃郁","酸辣交織","微苦後甘","層次分明","入口即化","餘韻繚繞","清爽不膩","甘甜潤喉"]},
+  {k:"touch",t:"觸覺",en:"TOUCH",c:"#3B2A1C",bg:"rgba(59,42,28,.1)",
+   g:"筷子或勺子接觸時的阻力？送入口中的溫度、質地、彈性與化開的過程？",
+   ph:"口感",
+   w:["外酥內嫩","Q 彈有勁","滑順綿密","燙口滾熱","酥脆掉渣","彈牙紮實","柔軟蓬鬆","入口即融","膠質黏唇"]}
+];
+
+const QUIZ = [
+  {q:"下列何者「不是」課堂所提「飲食」的三種意義層次？",o:["描述義","詮釋義","評價義","批判義"],a:3,
+   e:"課堂將「飲食」的意義分為描述義（飲食是什麼）、詮釋義（飲食的意義）與評價義（飲食的價值）三層。"},
+  {q:"關於廣義的「飲食書寫」，下列敘述何者正確？",o:["僅限於文學創作的範圍","包含文學、史學、哲學、科學等不同領域","只具備抒情性，不具功能性","是傳統既有議題，並不新興"],a:1,
+   e:"廣義的飲食書寫涵蓋文學、史學、哲學、科學等領域，可能分別或同時兼具抒情性與功能性，且是一個新興議題。"},
+  {q:"「飲食文學」的核心定義是？",o:["記錄所有食材價格與產量的文獻","以特定文學手法與藝術形式表現飲食題材所代表的符號意義","任何與吃有關的網路文章","僅指食譜與烹飪教學"],a:1,
+   e:"飲食文學必須更精確地具備文學特質及藝術表現，呈現飲食題材的符號意義，而非單純記錄或教學。"},
+  {q:"《隨園食單》在中國傳統飲食書寫中屬於哪一類型？",o:["醫食養生","茶酒文化","烹飪與飲饌理論","食貨經濟"],a:2,
+   e:"《隨園食單》與《食珍錄》同屬「烹飪與飲饌理論」類，講究技法、調味與品評標準。"},
+  {q:"《東京夢華錄》《武林舊事》屬於哪一類飲食書寫？",o:["地方人文","飲食異事","飲食制度","保存語言材料"],a:0,
+   e:"兩書皆以城市生活與市井食俗為對象，屬於「地方人文」類型。"},
+  {q:"1950–60 年代臺灣飲食書寫的主調是？",o:["異國料理評鑑","懷鄉的飲食書寫","消費導覽式寫作","科學營養分析"],a:1,
+   e:"1949 年後大批外省居民遷臺，對故鄉的懷念形諸文字，如《中央日報》副刊「家鄉味」專欄。"},
+  {q:"梁實秋《雅舍談吃》、逯耀東《肚大能容》屬於哪一時期的書寫風貌？",o:["1950–60 年代懷鄉書寫","1970–80 年代憶舊、品賞與考證式書寫","1990 年以後詩意與虛構","日治時期的地方誌"],a:1,
+   e:"1970–80 年代在個人飲食記憶之外，加入典故、歷史與文化的引用考據，為飲食文學增加知識面向。"},
+  {q:"舒國治《臺北小吃札記》與焦桐「臺灣味道三部曲」最能對應 1990 年以後的哪種類型？",o:["記事與抒情","尋訪與品評","知性與論述","詩意與虛構"],a:1,
+   e:"作家四处尋訪美食、提供資訊與經驗，並帶有品評高下之意，屬於「尋訪與品評」。"},
+  {q:"下列何者「不是」飲食文學的五大寫作特色？",o:["突出感官印象的描繪","融入食譜或烹飪方法","挖掘飲食與人生的關聯","僅記錄食材成本與市場價格"],a:3,
+   e:"五大特色為：感官描繪、融入食譜、飲食與人生的關聯、體察本土與異國文化、以實踐帶動新風潮。"},
+  {q:"下列何者「不是」課堂所列臺灣飲食文學形成的因素？",o:["政治改革帶動的社會轉型","經濟發展帶來的產業轉型與都市化","消費社會情境","政府全面禁止餐飲廣告"],a:3,
+   e:"形成因素為政治改革、經濟發展與都市化、消費社會情境三者，並未涉及禁止餐飲廣告。"}
+];
+
+const GLOSSARY = [
+  {t:"飲食書寫（廣義）",d:"與飲食相關的書寫題材與表現類型，含文學、史學、哲學、科學等領域；牽涉時代、環境、語言、社會文化背景，兼具抒情性與功能性。"},
+  {t:"飲食文獻",d:"偏重記錄、考證與知識性的飲食文本，如本草農書、食貨經濟、飲食制度等，是飲食書寫中「功能性」較強的一支。"},
+  {t:"飲食文學",d:"飲食書寫中較小的集合，必須具備文學特質與藝術表現，以符號意義呈現作者的思想、情感與想像，或再現某時某地的飲食文化情境。"},
+  {t:"符號化",d:"文學將具體的食物抽象化，使其承載情感、記憶與文化意義的過程——食物由「可食之物」轉為「可讀之意」。"},
+  {t:"《山家清供》",d:"宋代林洪所撰，記山林清簡之食，屬「醫食養生」類型，亦為課堂簡報列出的傳統飲食書寫代表。"},
+  {t:"《隨園食單》",d:"清代袁枚所撰，系統化記錄菜餚作法與飲饌見解，屬「烹飪與飲饌理論」類型。"},
+  {t:"《糖霜譜》",d:"宋代王灼所撰，記製糖工藝與糖霜知識，屬「日用百科」類型，亦見於課堂簡報之傳統書寫舉例。"},
+  {t:"「家鄉味」專欄",d:"《中央日報》副刊專欄，是 1950–60 年代懷鄉飲食書寫的重要發表園地。"},
+  {t:"臺灣味道三部曲",d:"焦桐的《臺灣味道》《臺灣肚皮》《臺灣舌頭》，屬 1990 年以後「尋訪與品評」類型的代表作品。"},
+  {t:"五感摹寫",d:"本課創作練習方法：以視覺、聽覺、嗅覺、味覺、觸覺，細膩描寫一道食物從「出現」到「入口」的完整過程。"}
+];
+
+const SAMPLE = [
+  {tag:"視覺",txt:"麵攤的燈泡垂在玻璃上頭，昏黃的光穿過一柱白霧落進碗裡。清亮的湯面浮著三兩片青蔥，切成細碎的翠綠像撒在宣紙上的墨點；豬油星子金黃，緩緩地打著轉。"},
+  {tag:"聽覺",txt:"老闆掀開鍋蓋的一剎那，水聲咕嘟地湧上來，接著是竹笊籬甩水的啪啪兩響。鄰座客人吸麵的唏哩聲、瓷勺磕著碗緣的清脆一記，全被夜風收進這條窄巷裡。"},
+  {tag:"嗅覺",txt:"先是蔥花被熱湯激出的清香，接著是豬油與油蔥酥那種厚實的、幾乎帶點甜意的焦香，最後才慢慢浮出一縷鹵汁的陈年鹹氣——聞到這裡，胃便自己先醒了。"},
+  {tag:"觸覺",txt:"碗壁燙得只能以指尖輪替著托。麵條挾起時微微下垂、輕輕顫動，入口滑順而帶一點彈勁，熱度從舌尖一路燙到耳後。"},
+  {tag:"味覺",txt:"第一口是純粹的鹹鮮，簡潔得近乎坦白；再嚼兩下，油蔥的甜才從鹹味底下滲出來，餘韻帶著一絲焦香。這碗麵什麼也沒多說，卻把冬夜裡一個人的孤獨，妥貼地餵飽了。"}
+];
+
+/* ==================== RENDER ==================== */
+const $ = s=>document.querySelector(s), $$ = s=>Array.from(document.querySelectorAll(s));
+
+/* --- 三重意義 --- */
+$$('#meanGrid .meanCard').forEach(c=>{
+  c.addEventListener('click',()=>{
+    const was = c.classList.contains('on');
+    $$('#meanGrid .meanCard').forEach(x=>x.classList.remove('on'));
+    if(!was) c.classList.add('on');
+  });
+});
+
+/* --- venn --- */
+const VINFO = {
+  writing:{t:"廣義的「飲食書寫」",
+    b:"意指與飲食相關的書寫題材與表現類型，涵蓋文學、史學、哲學、科學等不同領域。它牽涉時代、環境、語言、社會文化等背景因素，可能分別或同時兼具抒情性與功能性。飲食書寫是一個新興議題，不論創作型態、表現方式、主題類型都十分多元。",
+    tags:["新興議題","跨領域","抒情性 × 功能性","題材多元"]},
+  doc:{t:"飲食文獻",
+    b:"飲食書寫中偏重知識性與功能性的一支：保存語言材料、本草農書、食貨經濟、飲食制度、醫食養生等。它以記錄、考證、實用為目的，是理解飲食文化的重要史料基礎。",
+    tags:["記錄性","考證性","功能性","史料價值"]},
+  lit:{t:"飲食文學",
+    b:"飲食書寫中更小的集合，指以特定文學手法與藝術形式，表現飲食題材所代表的符號意義。可能是作者思想、情感與想像的表現，也可能是再現某時某地的飲食文化存在情境，必須更精確地具備文學特質與藝術表現。",
+    tags:["文學手法","藝術形式","符號意義","情感與想像"]}
+};
+$$('.vzone').forEach(z=>{
+  z.addEventListener('click',()=>{
+    const d = VINFO[z.dataset.zone];
+    $('#vTitle').textContent = d.t;
+    $('#vBody').textContent = d.b;
+    $('#vTags').innerHTML = d.tags.map(x=>`<span>${x}</span>`).join('');
+    const p = $('#vPanel'); p.style.animation='none'; void p.offsetWidth; p.style.animation='fadeUp .45s ease';
+  });
+});
+
+/* --- 十大類型 --- */
+$('#typeGrid').innerHTML = TYPES.map((x,i)=>
+  `<button class="typeBtn${i===0?' sel':''}" data-i="${i}"><div class="tn">${x.n}</div><div class="tt">${x.t}</div></button>`).join('');
+function renderType(i){
+  const x = TYPES[i];
+  $('#typeDetail').innerHTML = `<div class="tdSeal">${x.n}</div>
+    <div><div class="sub">TYPE ${String(i+1).padStart(2,'0')} · 中國傳統飲食書寫</div>
+    <h4>${x.t}</h4><p>${x.d}</p>
+    <div class="bookRow">${x.b.map(b=>`<span>${b}</span>`).join('')}<span style="background:rgba(184,84,51,.1);border-color:transparent;color:var(--terra)">代表典籍</span></div></div>`;
+  const el = $('#typeDetail'); el.style.animation='none'; void el.offsetWidth; el.style.animation='fadeUp .5s ease';
+}
+$$('.typeBtn').forEach(b=>b.addEventListener('click',()=>{
+  $$('.typeBtn').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel'); renderType(+b.dataset.i);
+}));
+renderType(0);
+
+/* --- 配對遊戲 --- */
+function shuffle(a){return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);}
+let picked=null, matched=0;
+function initGame(){
+  matched=0; picked=null;
+  $('#gameScore').textContent='進度 0 / 6';
+  const books = shuffle(MATCH.map((m,i)=>({label:m.book,i})));
+  const cats  = shuffle(MATCH.map((m,i)=>({label:m.cat,i})));
+  $('#gBooks').innerHTML = books.map(b=>`<button class="mItem b" data-i="${b.i}">${b.label}</button>`).join('');
+  $('#gCats').innerHTML  = cats.map(c=>`<button class="mItem c" data-i="${c.i}">${c.label}</button>`).join('');
+  $$('#gBooks .mItem').forEach(btn=>btn.addEventListener('click',()=>{
+    if(btn.disabled) return;
+    $$('#gBooks .mItem').forEach(x=>x.classList.remove('picked'));
+    btn.classList.add('picked'); picked=btn;
+  }));
+  $$('#gCats .mItem').forEach(btn=>btn.addEventListener('click',()=>{
+    if(btn.disabled||!picked) { if(!picked) toast('請先點選左側的一本書'); return; }
+    if(btn.dataset.i===picked.dataset.i){
+      btn.classList.remove('picked'); btn.classList.add('right'); btn.disabled=true;
+      picked.classList.remove('picked'); picked.classList.add('right'); picked.disabled=true;
+      picked=null; matched++;
+      $('#gameScore').textContent=`進度 ${matched} / 6`;
+      if(matched===6){ toast('🎉 全數答對！你已掌握十大類型'); addDone('game'); }
+    }else{
+      btn.classList.add('wrong'); const p=picked; p.classList.add('wrong');
+      setTimeout(()=>{btn.classList.remove('wrong');p.classList.remove('wrong','picked');},420);
+      picked=null;
+    }
+  }));
+}
+$('#gameReset').addEventListener('click',initGame);
+initGame();
+
+/* --- 臺灣 tabs --- */
+$$('#facTabs .tab').forEach(t=>t.addEventListener('click',()=>{
+  $$('#facTabs .tab').forEach(x=>x.classList.remove('on')); t.classList.add('on');
+  $$('#facPanels .tabPanel').forEach((p,i)=>p.classList.toggle('on',i===+t.dataset.t));
+}));
+
+/* --- timeline --- */
+$('#timeline').innerHTML = ERAS.map((e,i)=>`
+  <div class="tlItem${i===2?' open':''}" data-i="${i}">
+    <div class="tlDot">${e.n}</div>
+    <div class="tlCard">
+      <div class="tlHead"><span class="tlYear">${e.y}</span><h4>${e.t}</h4>
+        <svg class="tlChev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="tlBody"><div class="tlBodyIn">${e.d}<div class="chips">${e.c.map(c=>`<span>${c}</span>`).join('')}</div></div></div>
+    </div>
+  </div>`).join('');
+function tlSync(item){
+  const b = item.querySelector('.tlBody');
+  b.style.maxHeight = item.classList.contains('open') ? b.scrollHeight+'px' : '0px';
+}
+$$('.tlItem').forEach(it=>{
+  it.querySelector('.tlHead').addEventListener('click',()=>{ it.classList.toggle('open'); tlSync(it); });
+});
+$$('.tlItem').forEach(tlSync);
+
+/* --- era5 --- */
+$('#era5').innerHTML = ERA5.map((e,i)=>`<div class="e5${i===0?' on':''}" data-i="${i}"><div class="e5i">${e.i}</div><h6>${e.t}</h6></div>`).join('');
+function renderE5(i){
+  const e = ERA5[i];
+  $('#e5Panel').innerHTML = `<h4>${e.i}・${e.t}</h4><p>${e.d}</p>
+    <div class="bookRow" style="margin-top:16px">${e.b.map(b=>`<span>${b}</span>`).join('')}</div>`;
+  const p=$('#e5Panel'); p.style.animation='none'; void p.offsetWidth; p.style.animation='fadeUp .45s ease';
+}
+$$('.e5').forEach(b=>b.addEventListener('click',()=>{
+  $$('.e5').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderE5(+b.dataset.i);
+}));
+renderE5(0);
+
+/* --- features --- */
+$('#featList').innerHTML = FEATURES.map((f,i)=>`
+  <div class="feat reveal" data-i="${i}">
+    <div class="fn">${String(i+1).padStart(2,'0')}</div>
+    <div><h4>${f.t}</h4><p>${f.d}</p><div class="featExtra">${f.e}</div></div>
+    <div class="plus">＋</div>
+  </div>`).join('');
+$$('.feat').forEach(f=>f.addEventListener('click',()=>{
+  f.classList.toggle('open');
+  f.querySelector('.plus').textContent = f.classList.contains('open') ? '－' : '＋';
+}));
+
+/* --- workshop senses --- */
+$('#foodRow').innerHTML = ["小籠包","牛肉麵","滷肉飯","珍珠奶茶","鳳梨酥","麻辣鍋","蚵仔煎","外婆的紅燒肉","陽春麵"]
+  .map(f=>`<button class="wChip" data-food="${f}">${f}</button>`).join('');
+$$('#foodRow .wChip').forEach(b=>b.addEventListener('click',()=>{ $('#foodName').value=b.dataset.food; saveWork(); }));
+
+const ICO = {
+ sight:'<svg viewBox="0 0 24 24"><path d="M1.8 12S5.5 5.5 12 5.5 22.2 12 22.2 12 18.5 18.5 12 18.5 1.8 12 1.8 12z"/><circle cx="12" cy="12" r="3.2"/></svg>',
+ sound:'<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 8.5a5 5 0 0 1 0 7"/><path d="M19.6 6a8.5 8.5 0 0 1 0 12"/></svg>',
+ smell:'<svg viewBox="0 0 24 24"><path d="M7 21c-1.7-2-2.5-4-2.5-6 0-3 2-5 4.5-5s4.5 2 4.5 5c0 2-.8 4-2.5 6"/><path d="M14 8c0-2 1.5-3.5 3.5-3.5S21 6 21 8"/><path d="M10 4.5C10 3 11 2 12.5 2"/></svg>',
+ taste:'<svg viewBox="0 0 24 24"><path d="M12 3c3.5 0 6 2.4 6 5.6 0 4.2-3.6 6.4-3.6 9.4 0 1.7-1 3-2.4 3s-2.4-1.3-2.4-3C9.6 15 6 12.8 6 8.6 6 5.4 8.5 3 12 3z"/><path d="M9.5 9c.6-1 1.5-1.6 2.5-1.8"/></svg>',
+ touch:'<svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.8 1.8 0 1 1 3.6 0V11"/><path d="M12.6 11V9.4a1.7 1.7 0 0 1 3.4 0V13"/><path d="M16 12.2a1.7 1.7 0 0 1 3.4 0V16a5.5 5.5 0 0 1-5.5 5.5h-2A5.5 5.5 0 0 1 6.4 16v-3.4a1.7 1.7 0 0 1 3.4 0"/></svg>'
+};
+$('#senseGrid').innerHTML = SENSES.map(s=>`
+  <div class="senseCard">
+    <div class="senseTop">
+      <div class="senseIco" style="background:${s.bg};color:${s.c}"><span style="display:block;width:24px;height:24px">${ICO[s.k].replace('<svg','<svg stroke="'+s.c+'"')}</span></div>
+      <div><h5>${s.t}</h5><small>${s.en} · ${s.ph}</small></div>
+    </div>
+    <div class="guide">${s.g}</div>
+    <textarea class="txt ws" id="ws_${s.k}" rows="4" placeholder="在此描寫${s.t}細節⋯⋯"></textarea>
+    <div class="count" id="ct_${s.k}">0 字</div>
+    <div class="chipRow">${s.w.map(w=>`<button class="wChip" data-t="${s.k}" data-w="${w}">${w}</button>`).join('')}</div>
+  </div>`).join('');
+$$('.wChip[data-t]').forEach(c=>c.addEventListener('click',()=>{
+  const ta = $('#ws_'+c.dataset.t);
+  ta.value = ta.value ? ta.value.replace(/[，。、\s]*$/,'') + '、' + c.dataset.w : c.dataset.w;
+  ta.dispatchEvent(new Event('input')); ta.focus();
+}));
+$$('.ws').forEach(ta=>ta.addEventListener('input',()=>{
+  $('#ct_'+ta.id.slice(3)).textContent = ta.value.trim().length+' 字';
+  saveWork();
+}));
+['foodName','foodScene'].forEach(id=>$('#'+id).addEventListener('input',saveWork));
+
+/* --- sample --- */
+$('#sampleIn').innerHTML = SAMPLE.map(s=>`<span class="sTag">${s.tag}</span><p>${s.txt}</p>`).join('');
+$('#sampleHead').addEventListener('click',()=>{
+  const b=$('#sampleBody'), o=$('#sampleIco');
+  const open = b.style.maxHeight && b.style.maxHeight!=='0px';
+  b.style.maxHeight = open ? '0px' : b.scrollHeight+'px';
+  o.textContent = open ? '＋' : '－';
+});
+
+/* --- AI prompt builder --- */
+function buildPrompt(){
+  const food = $('#foodName').value.trim() || '（未命名的一道食物）';
+  const scene = $('#foodScene').value.trim() || '（未提供情境）';
+  const parts = SENSES.map(s=>{
+    const v = $('#ws_'+s.k).value.trim();
+    return `【${s.t}】${v || '（尚未描寫）'}`;
+  }).join('\n');
+  const out =
+`# 任務一：飲食文學潤飾與擴寫
+你是一位兼具美食家與散文家身份的飲食文學作家。請根據以下學生提供的五感摹寫素材，改寫成一篇 600–800 字的飲食散文。
+
+◆ 食物名稱：${food}
+◆ 情境與記憶：${scene}
+◆ 五感素材：
+${parts}
+
+◆ 寫作要求：
+1. 保留我原本的五感細節，不要凭空添加未提及的事實。
+2. 依「食物出現 → 觀察 → 夾起 → 入口 → 餘韻」的時間軸推進。
+3. 突出感官印象的描繪，並適度融入烹飪方法或小秘訣。
+4. 挖掘飲食與人生（親情／童年／離鄉／時間）的關聯，讓食物成為情感的符號。
+5. 體察本土文化脈絡，語言典雅而親切，避免浮誇的形容詞堆疊。
+6. 結尾以一個具體的畫面或味覺餘韻收束，不要寫成說教式總結。
+
+---
+# 任務二：生成式圖像提示詞（可貼至圖像生成工具）
+"A cinematic overhead food photograph of ${food}, ${scene.replace(/\n/g,' ')}，以蒸汽、暖色側光、深色木桌與瓷器呈現，高級美食雜誌風格，柔和景深，畫面不出現文字。"
+
+---
+# 任務三：追問與反思
+請指出上述素材中「哪一個感官描寫最薄弱」，並提供三個具體的追問，引導我補充細節。`;
+  $('#promptOut').textContent = out;
+  const p=$('#promptOut'); p.style.animation='none'; void p.offsetWidth; p.style.animation='fadeUp .5s ease';
+  toast('✦ 提示詞已生成');
+  addDone('workshop');
+}
+$('#btnBuild').addEventListener('click',buildPrompt);
+$('#btnCopy').addEventListener('click',()=>{
+  const t=$('#promptOut').textContent;
+  if(!t||t.startsWith('（尚未')) return toast('請先點擊「生成我的提示詞」');
+  navigator.clipboard?.writeText(t).then(()=>toast('已複製到剪貼簿')).catch(()=>toast('複製失敗，請手動選取'));
+});
+$('#btnDownload').addEventListener('click',()=>{
+  const food=$('#foodName').value.trim()||'我的食物';
+  let txt=`【五感摹寫】${food}\n情境：${$('#foodScene').value.trim()}\n\n`;
+  SENSES.forEach(s=>{ txt+=`【${s.t}】\n${$('#ws_'+s.k).value.trim()||'（未填寫）'}\n\n`; });
+  txt+='\n===== 生成式 AI 提示詞 =====\n\n'+$('#promptOut').textContent;
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain;charset=utf-8'}));
+  a.download=`五感摹寫_${food}.txt`; a.click(); URL.revokeObjectURL(a.href);
+  toast('已下載你的作品');
+});
+$('#btnClear').addEventListener('click',()=>{
+  if(!confirm('確定要清空所有填寫內容嗎？')) return;
+  $('#foodName').value=''; $('#foodScene').value=''; $('#promptOut').textContent='（尚未生成。完成上方五感描寫後，點擊「生成我的提示詞」。）';
+  $$('.ws').forEach(t=>{t.value=''; $('#ct_'+t.id.slice(3)).textContent='0 字';});
+  saveWork(); toast('已清空');
+});
+
+/* --- localStorage --- */
+function saveWork(){
+  try{
+    const d={food:$('#foodName').value,scene:$('#foodScene').value,s:{}};
+    SENSES.forEach(s=>d.s[s.k]=$('#ws_'+s.k).value);
+    localStorage.setItem('foodLitWork',JSON.stringify(d));
+  }catch(e){}
+}
+function loadWork(){
+  try{
+    const d=JSON.parse(localStorage.getItem('foodLitWork')||'null'); if(!d) return;
+    $('#foodName').value=d.food||''; $('#foodScene').value=d.scene||'';
+    SENSES.forEach(s=>{ const ta=$('#ws_'+s.k); ta.value=(d.s&&d.s[s.k])||''; $('#ct_'+s.k).textContent=ta.value.trim().length+' 字'; });
+  }catch(e){}
+}
+loadWork();
+
+/* --- quiz --- */
+const KEYS=['A','B','C','D'];
+let answered=0, correct=0;
+function renderQuiz(){
+  answered=0; correct=0;
+  $('#quizList').innerHTML = QUIZ.map((q,qi)=>`
+    <div class="qCard" id="qc${qi}">
+      <div class="qNum">QUESTION ${String(qi+1).padStart(2,'0')} / 10</div>
+      <div class="qText">${q.q}</div>
+      <div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-q="${qi}" data-o="${oi}"><span class="k">${KEYS[oi]}</span><span>${o}</span></button>`).join('')}</div>
+      <div class="expl" id="ex${qi}">💡 ${q.e}</div>
+    </div>`).join('');
+  $('#quizResult').classList.remove('show');
+  syncQuizTop();
+  $$('.opt').forEach(b=>b.addEventListener('click',()=>answer(b)));
+}
+function answer(b){
+  const qi=+b.dataset.q, oi=+b.dataset.o, q=QUIZ[qi];
+  const card=$('#qc'+qi); if(card.classList.contains('answered')) return;
+  card.classList.add('answered');
+  const opts=card.querySelectorAll('.opt');
+  opts.forEach(o=>{o.disabled=true; if(+o.dataset.o===q.a) o.classList.add('correct');});
+  if(oi!==q.a) b.classList.add('wrong'); else correct++;
+  answered++;
+  $('#ex'+qi).classList.add('show');
+  syncQuizTop();
+  if(answered===QUIZ.length) showResult();
+}
+function syncQuizTop(){
+  $('#quizCount').textContent=`已完成 ${answered} / 10`;
+  $('#quizFill').style.width=(answered/QUIZ.length*100)+'%';
+}
+function showResult(){
+  const pct=Math.round(correct/QUIZ.length*100);
+  $('#resScore').textContent=correct+' / 10';
+  let t,m;
+  if(pct===100){t='🏆 滿分！飲食文學鑑賞家';m='你已完整掌握飲食的三重意義、傳統書寫類型與臺灣飲食文學分期，可以直接進入創作實踐。';}
+  else if(pct>=80){t='✨ 優秀！接近精通';m='概念掌握度高，建議回到「傳統十類」與「臺灣分期」複習錯誤題目的相關段落。';}
+  else if(pct>=60){t='🍵 不錯，再加強一下';m='基本架構已建立，建議重讀「書寫 vs 文學」的集合關係，並再次挑戰配對遊戲。';}
+  else{t='🌱 繼續加油';m='建議由 01 站重新走過一次，特別是定義層次與五大特色，之後再回來測驗。';}
+  $('#resTitle').textContent=t; $('#resText').textContent=m;
+  $('#quizResult').classList.add('show');
+  $('#quizResult').scrollIntoView({behavior:'smooth',block:'center'});
+  addDone('quiz');
+  try{ const best=+(localStorage.getItem('foodLitBest')||0); if(correct>best) localStorage.setItem('foodLitBest',correct); }catch(e){}
+}
+$('#quizReset').addEventListener('click',()=>{renderQuiz();toast('測驗已重設');$('#quizList').scrollIntoView({behavior:'smooth',block:'start'});});
+$('#resRetry').addEventListener('click',()=>$('#quizReset').click());
+renderQuiz();
+
+/* --- glossary --- */
+$('#glGrid').innerHTML = GLOSSARY.map((g,i)=>`
+  <div class="gl reveal"><div class="glH"><b>${g.t}</b><i>＋</i></div><div class="glB"><p>${g.d}</p></div></div>`).join('');
+$$('.gl').forEach(el=>el.querySelector('.glH').addEventListener('click',()=>{
+  const b=el.querySelector('.glB'), open=el.classList.contains('open');
+  $$('.gl').forEach(x=>{x.classList.remove('open');x.querySelector('.glB').style.maxHeight='0px';x.querySelector('i').textContent='＋';});
+  if(!open){el.classList.add('open');b.style.maxHeight=b.scrollHeight+'px';el.querySelector('i').textContent='＋';}
+}));
+
+/* --- reveal + nav + progress --- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+$$('.reveal').forEach(el=>io.observe(el));
+
+const SECIDS=['meaning','define','culture','classic','taiwan','features','workshop','quiz','glossary'];
+const doneSet=new Set();
+const doneStore={game:'配對遊戲',workshop:'創作工作坊',quiz:'學習測驗'};
+function addDone(k){ if(!doneStore[k])return; if(doneSet.has(k))return; doneSet.add(k); updateProg(); }
+function updateProg(){
+  const total=SECIDS.length+Object.keys(doneStore).length;
+  const got=doneSet.size;
+  const pct=Math.round(got/total*100);
+  $('#progVal').textContent=pct+'%';
+  $('#progRing').style.strokeDashoffset=201-(201*pct/100);
+}
+const navObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    const id=e.target.id;
+    const link=$(`.navLinks a[href="#${id}"]`);
+    if(e.isIntersecting){
+      $$('.navLinks a').forEach(a=>a.classList.remove('active'));
+      if(link) link.classList.add('active');
+      if(SECIDS.includes(id)&&!doneSet.has(id)){
+        doneSet.add(id); if(link) link.classList.add('done'); updateProg();
+      }
+    }
+  });
+},{threshold:.3});
+SECIDS.forEach(id=>{const el=document.getElementById(id); if(el) navObs.observe(el);});
+
+/* scroll bar + toTop */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  $('#scrollBar').style.width=p+'%';
+  $('#toTop').classList.toggle('show',h.scrollTop>700);
+},{passive:true});
+$('#toTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+$('#prog').addEventListener('click',()=>$('#quiz').scrollIntoView({behavior:'smooth'}));
+
+/* toast */
+let tTimer;
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(tTimer); tTimer=setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+/* resize fix for open accordions */
+window.addEventListener('resize',()=>{
+  $$('.tlItem.open').forEach(tlSync);
+  $$('.gl.open').forEach(el=>{const b=el.querySelector('.glB');b.style.maxHeight=b.scrollHeight+'px';});
+  const sb=$('#sampleBody'); if(sb.style.maxHeight&&sb.style.maxHeight!=='0px') sb.style.maxHeight=sb.scrollHeight+'px';
+});
+updateProg();
+</script>
+</body>
+</html>
